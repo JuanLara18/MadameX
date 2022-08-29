@@ -64,3 +64,117 @@ function D_Vigenere(text, key){
 // tests
 // console.log("Funciona: ", C_Vigenere("HolaMuchoGusto", "Clave") == "JZLVQWNHJKWDTJ");
 // console.log("Funciona: ", D_Vigenere(C_Vigenere("HolaMuchoGusto", "Clave"),"clave") == "HolaMuchoGusto".toUpperCase());
+
+function gcd(m, n){
+    
+    var gcd; 
+
+    while(true){
+        gcd = m % n;
+        if(gcd == 0){
+            return n;
+        }
+        m = n;
+        n = gcd;
+    }
+}
+
+// Esto sobra pero lo pongo porque se puede mejorar
+function C_Cesar(text, key){
+    return C_Vigenere(text, key)
+}
+
+function D_Cesar(text, key){
+    return D_Vigenere(text, key)
+}
+
+
+function C_Afin(text, key){ // Asumimos que la clave es como ["m", "d"]
+    
+    var a = str2num(key[0]);
+    var b = str2num(key[1]);
+
+    //if ( gcd(a, 26) != 1){
+    //    alert("Contraseña no válida"); // Acá se supone que el profe quiere que sugiramos una clave.
+    //}
+
+    var text_num = str2num(text);
+
+    var cifrado = '';
+
+    const size = text.length;
+
+    for (let i = 0; i < size; i++) {
+        var ind = 26 + parseInt(a) * parseInt(text_num[i]) + parseInt(b);
+        cifrado += getLetter(ind); 
+    }
+
+    return cifrado;
+
+}
+
+// console.log(C_Afin("abcde", ["c", "b"]));
+
+// Para el decifrado afín solo es saber calcular el inverso módulo 26
+
+function Inv_mod(a, m = 26){
+
+    let m0 = m;
+    let y = 0;
+    let x = 1;
+ 
+    if (m == 1)
+        return 0;
+ 
+    while (a > 1)
+    { 
+        // q is quotient
+        let q = parseInt(a / m);
+        let t = m;
+ 
+        // m is remainder now,
+        // process same as
+        // Euclid's algo
+        m = a % m;
+        a = t;
+        t = y;
+ 
+        // Update y and x
+        y = x - q * y;
+        x = t;
+    }
+ 
+    // Make x positive
+    if (x < 0){
+        x += m0;
+    }
+    return x;
+}
+
+function D_Afin(text, key){ // Asumimos que la clave es como ["m", "d"]
+    
+    var a = str2num(key[0]);
+    var b = str2num(key[1]);
+
+    //if ( gcd(a, 26) != 1){
+    //    alert("Contraseña no válida"); // Acá se supone que el profe quiere que sugiramos una clave.
+    //}
+
+    var text_num = str2num(text);
+
+    var decifrado = '';
+
+    const size = text.length;
+
+    var ia = Inv_mod(a)
+
+    for (let i = 0; i < size; i++) {
+        var ind = 26 + parseInt(ia) *( parseInt(text_num[i]) - parseInt(b));
+        decifrado += getLetter(ind); 
+    }
+
+    return decifrado;
+
+}
+
+// console.log( D_Afin( C_Afin( "abcde" , ["h", "a"]), ["h", "a"]) );
