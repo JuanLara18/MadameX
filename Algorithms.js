@@ -45,6 +45,46 @@ function Inv_mod(a, m = 26){
     return x;
 }
 
+const modularMultiplicativeInverse = (a, modulus) => {
+    // Calculate current value of a mod modulus
+    const b = BigInt(a % modulus);
+      
+      // We brute force the search for the smaller hipothesis, as we know that the number must exist between the current given modulus and 1
+      for (let hipothesis = 1n; hipothesis <= modulus; hipothesis++) {
+          if ((b * hipothesis) % modulus == 1n) return hipothesis;
+      }
+        // If we do not find it, we return 1
+      return 1n;
+  }
+
+  const solveCRT = (remainders, modules) => {
+    // Multiply all the modulus
+    const prod = modules.reduce((acc, val) => acc * val, 1n);
+    
+    return modules.reduce((sum, mod, index) => {
+        // Find the modular multiplicative inverse and calculate the sum
+    // SUM( remainder * productOfAllModulus/modulus * MMI ) (mod productOfAllModulus) 
+        const p = prod / mod;
+        return sum + (remainders[index] * modularMultiplicativeInverse(p, mod) * p);
+    }, 0n) % prod;
+}
+
+function S_CRT(re, mo){
+    var a = solveCRT(re, mo)
+    
+    return parseInt(a)
+}
+
+// x mod 5 = 1
+// x mod 59 = 13
+// x mod 24 = 7
+const remainders  = [1, 13, 7].map(BigInt)
+const modules = [5, 59, 24].map(BigInt)
+
+// console.log(solveCRT(remainders, modules)); // 6031
+// console.log(S_CRT(remainders, modules)); // 6031
+
+
 function Mul_Mat(a, b) {
     var aNumRows = a.length, aNumCols = a[0].length,
         bNumRows = b.length, bNumCols = b[0].length,
@@ -129,7 +169,6 @@ function D_Vigenere(text, key){
 }
 
 function C_Afin(text, key){ // Asumimos que la clave es como ["m", "d"]
-    
     var a = str2num(key[0]);
     var b = str2num(key[1]);
 
@@ -149,16 +188,15 @@ function C_Afin(text, key){ // Asumimos que la clave es como ["m", "d"]
     }
 
     return cifrado;
-
 }
 function D_Afin(text, key){ // Asumimos que la clave es como ["m", "d"]
     
     var a = str2num(key[0]);
     var b = str2num(key[1]);
 
-    //if ( gcd(a, 26) != 1){
-    //    alert("Contraseña no válida"); // Acá se supone que el profe quiere que sugiramos una clave.
-    //}
+    if ( gcd(a, 26) != 1){ // Suggest a password
+        return "Invalid password";
+    }
 
     var text_num = str2num(text);
 
@@ -166,10 +204,10 @@ function D_Afin(text, key){ // Asumimos que la clave es como ["m", "d"]
 
     const size = text.length;
 
-    var ia = Inv_mod(a)
+    var ia = Inv_mod(a);
 
     for (let i = 0; i < size; i++) {
-        var ind = 26 + parseInt(ia) *( parseInt(text_num[i]) - parseInt(b));
+        var ind = 26*26 + parseInt(ia) *( parseInt(text_num[i]) - parseInt(b));
         decifrado += getLetter(ind); 
     }
 
@@ -177,23 +215,62 @@ function D_Afin(text, key){ // Asumimos que la clave es como ["m", "d"]
 
 }
 
-function C_Hill(text, key){
-    
-    m = key.length;
+var a = C_Afin("EsteMensajeEsParaDecodificarlo", ["p", "p"]);
 
+// Contar ocurrencias de las letras
+
+function A_Afin(text){ // Fuerza bruta
+    
+    let size = Letters.length;
+    
+    let count = {}
+
+    // Count with a dictionary
+    text.split('').forEach(function(s) { 
+        count[s] ? count[s]++ : count[s] = 1;
+     });
+
+     console.log(count);
+
+     // Create items array
+    var items = Object.keys(count).map(function(key) {
+        return [key, count[key]];
+    });
+    
+    // Sort the array based on the second element
+    items.sort(function(first, second) {
+        return second[1] - first[1];
+    });
+    
+    // Create a new array with only the first 5 items
+    var arr_top = items.slice(0, 5);
+    console.log(arr_top);
+    
+    // Probar con el que más se repite a ser 'E'
+
+    // Probar con todos 
+    // for (let i = 0; i < size; i++) { // Recorremos las letras
+    //     if( gcd( i , size ) == 1 ){ // a
+    //         for (let j = 0; j < size; j++) { // b
+    //             //console.log(D_Afin(text, [getLetter(i), getLetter(j)]));
+    //         }
+    //     }
+    // }
+        
 }
 
+console.log("A atacar con afín: ", a);
+A_Afin(a);
 
+A_Afin(D_Afin(a, ["p", "p"]))
 
-
-console.log(A);
 
 // tests
 // console.log("Funciona: ", C_Vigenere("HolaMuchoGusto", "Clave") == "JZLVQWNHJKWDTJ");
 // console.log("Funciona: ", D_Vigenere(C_Vigenere("HolaMuchoGusto", "Clave"),"clave") == "HolaMuchoGusto".toUpperCase());
 // console.log(C_Afin("abcde", ["c", "b"]));
 // Para el decifrado afín solo es saber calcular el inverso módulo 26
-// console.log( D_Afin( C_Afin( "abcde" , ["h", "a"]), ["h", "a"]) );
+// console.log( D_Afin( C_Afin( "abcdefghijklmnopqrstuvwxyz" , ["h", "a"]), ["h", "a"]) );
 
 // A = Mul_Mat(
 
