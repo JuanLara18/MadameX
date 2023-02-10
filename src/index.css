@@ -18,6 +18,23 @@ code {
 
 } */
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.center-hill {
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .logo {
 
   animation-name: spin;
@@ -37,4 +54,15 @@ code {
     transform: rotate(0deg);
 
   }
+}
+
+#canvas-container {
+  margin-top: 2%;
+  margin-left: 10%;
+  width: 100%;
+  text-align: center;
+}
+
+canvas {
+  width: 30%;
 }

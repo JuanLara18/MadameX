@@ -39,6 +39,26 @@ import { VigenereInfo } from './algorithms/vigenere/VigenereInfo';
 import { VigenereAttack } from './algorithms/vigenere/VigenereAttack';
 import { VigenereEncrypt } from './algorithms/vigenere/VigenereEncrypt'
 import { VigenereDecrypt } from './algorithms/vigenere/VigenereDecrypt';
+import { AESInfo } from './algorithms/aes/AESInfo';
+import { AESEncrypt } from './algorithms/aes/AESEncrypt';
+import { TDESInfo } from './algorithms/tdes/TDESInfo';
+import { TDESEncrypt } from './algorithms/tdes/TDESEncrypt';
+import { SDESInfo } from './algorithms/sdes/SDESInfo';
+import { SDESEncrypt } from './algorithms/sdes/SDESEncrypt';
+import { GammaInfo } from './algorithms/gamma/GammaInfo';
+import { GammaEncrypt } from './algorithms/gamma/GammaEncrypt';
+
+import { RSAEncrypt } from './algorithms/rsa/RSAEncrypt';
+import { RSAInfo } from './algorithms/rsa/RSAInfo';
+
+import { RabinInfo } from './algorithms/rabin/RabinInfo';
+import { RabinEncrypt } from './algorithms/rabin/RabinEncrypt';
+
+import { ElGamalInfo } from './algorithms/elgamalzp/ElGamalZpInfo';
+import { ElGamalZpEncrypt } from './algorithms/elgamalzp/ElGamalZpEncrypt';
+
+import { ElGamalEccInfo } from './algorithms/elgamalecc/ElGamalEccInfo';
+import { ElGamalEccEncrypt } from './algorithms/elgamalecc/ElGamalEccEncrypt';
 
 
 
@@ -49,7 +69,7 @@ function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="#">
+            <Link color="inherit" href="https://github.com/CristhianJPardo/introduccion-a-la-criptografia-2022-ii">
                 MadameX
             </Link>{' '}
             {new Date().getFullYear()}.
@@ -263,6 +283,47 @@ const renderSwitch = (param1, param2, param3) => {
             return <VigenereDecrypt />
         case (param1 === "Vigenere" && param2 === "4"):
             return <VigenereAttack />
+
+        case (param1 === "AES" && param2 === "1"):
+            return <AESInfo />
+        case (param1 === "AES" && param2 === "2"):
+            return <AESEncrypt />
+
+        case (param1 === "T-DES" && param2 === "1"):
+            return <TDESInfo />
+        case (param1 === "T-DES" && param2 === "2"):
+            return <TDESEncrypt />
+
+        case (param1 === "S-DES" && param2 === "1"):
+            return <SDESInfo />
+        case (param1 === "S-DES" && param2 === "2"):
+            return <SDESEncrypt />
+
+        case (param1 === "Gamma Pentagonal" && param2 === "1"):
+            return <GammaInfo />
+        case (param1 === "Gamma Pentagonal" && param2 === "2"):
+            return <GammaEncrypt />
+
+        case (param1 === "RSA" && param2 === "1"):
+            return <RSAInfo />
+        case (param1 === "RSA" && param2 === "2"):
+            return <RSAEncrypt />
+
+        case (param1 === "Rabin" && param2 === "1"):
+            return <RabinInfo />
+        case (param1 === "Rabin" && param2 === "2"):
+            return <RabinEncrypt />
+
+        case (param1 === "ElGamal - Zp" && param2 === "1"):
+            return <ElGamalInfo />
+        case (param1 === "ElGamal - Zp" && param2 === "2"):
+            return <ElGamalZpEncrypt />
+
+        case (param1 === "ElGamal - ECC 25519" && param2 === "1"):
+            return <ElGamalEccInfo />
+        case (param1 === "ElGamal - ECC 25519" && param2 === "2"):
+            return <ElGamalEccEncrypt />
+
         default:
             return <InitialInfo />
     }

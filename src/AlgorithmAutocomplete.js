@@ -9,9 +9,6 @@ const AlgorithmAutocomplete = (props) => {
     const theme = createTheme({
         palette: {
             mode: "dark",
-            // primary: {
-            //     main: orange[500]
-            // }
         }
     })
 
@@ -21,7 +18,14 @@ const AlgorithmAutocomplete = (props) => {
         { id: 3, name: 'Substitution', group: "Monoalphabetic" },
         { id: 4, name: 'Hill', group: "Polyalphabetic" },
         { id: 5, name: 'Permutation', group: "Polyalphabetic" },
-        { id: 6, name: 'Vigenere', group: "Polyalphabetic" },
+        { id: 6, name: 'AES', group: "Block ciphers" },
+        { id: 7, name: 'S-DES', group: "Block ciphers" },
+        { id: 8, name: 'T-DES', group: "Block ciphers" },
+        { id: 9, name: 'Gamma Pentagonal', group: "Other Systems" },
+        { id: 10, name: 'RSA', group: "RSA" },
+        { id: 11, name: 'Rabin', group: "Rabin" },
+        { id: 12, name: 'ElGamal - Zp', group: "ElGamal" },
+        { id: 13, name: 'ElGamal - ECC 25519', group: "ElGamal" },
     ];
 
     console.log(selectedAlgorithm2);
@@ -38,6 +42,7 @@ const AlgorithmAutocomplete = (props) => {
                 )}
                 getOptionLabel={option => option.name}
                 isOptionEqualToValue={(option, value) => option.id === value.id}
+                // disabled ={option => option.name}
                 style={{ width: 240 }}
                 value={selectedAlgorithm2}
                 onChange={(_event, newAlgo) => {
