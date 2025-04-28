@@ -79,35 +79,50 @@ function Copyright() {
 
 let theme = createTheme({
     palette: {
-        primary: {
-            light: '#63ccff',
-            main: '#009be5',
-            dark: '#006db3',
-        },
+      mode: 'light',
+      primary: {
+        light: '#4dabf5',
+        main: '#1976d2',
+        dark: '#1565c0',
+        contrastText: '#fff',
+      },
+      secondary: {
+        light: '#f73378',
+        main: '#f50057',
+        dark: '#ab003c',
+        contrastText: '#fff',
+      },
+      background: {
+        default: '#f5f5f7',
+        paper: '#ffffff',
+      },
     },
     typography: {
-        h5: {
-            fontWeight: 500,
-            fontSize: 26,
-            letterSpacing: 0.5,
-        },
+      fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+      h5: {
+        fontWeight: 600,
+        fontSize: 26,
+        letterSpacing: 0.5,
+      },
+      h6: {
+        fontWeight: 500,
+        fontSize: 20,
+        letterSpacing: 0.25,
+      },
+      body1: {
+        fontSize: 16,
+        letterSpacing: 0.15,
+      },
+      button: {
+        fontWeight: 500,
+        textTransform: 'none',
+      },
     },
     shape: {
-        borderRadius: 8,
+      borderRadius: 12,
     },
-    components: {
-        MuiTab: {
-            defaultProps: {
-                disableRipple: true,
-            },
-        },
-    },
-    mixins: {
-        toolbar: {
-            minHeight: 48,
-        },
-    },
-});
+    shadows: [...createTheme().shadows],
+  });
 
 theme = {
     ...theme,
@@ -121,17 +136,36 @@ theme = {
         },
         MuiButton: {
             styleOverrides: {
-                root: {
-                    textTransform: 'none',
+              root: {
+                borderRadius: 8,
+                padding: '10px 16px',
+                transition: 'background-color 0.2s, box-shadow 0.2s',
+              },
+              contained: {
+                boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1)',
+                '&:hover': {
+                  boxShadow: '0px 6px 10px rgba(0, 0, 0, 0.15)',
                 },
-                contained: {
-                    boxShadow: 'none',
-                    '&:active': {
-                        boxShadow: 'none',
-                    },
-                },
+              },
             },
-        },
+          },
+        MuiCard: {
+            styleOverrides: {
+              root: {
+                borderRadius: 12,
+                boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.05)',
+              },
+            },
+          },
+        MuiTextField: {
+            styleOverrides: {
+              root: {
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: 8,
+                },
+              },
+            },
+          },
         MuiTabs: {
             styleOverrides: {
                 root: {

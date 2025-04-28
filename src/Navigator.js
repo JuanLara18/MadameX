@@ -13,23 +13,27 @@ import SimpleAccordion from './SimpleAccordion';
 import logo from './logo.png'
 import { ImageList, ImageListItem, Typography } from '@mui/material';
 
+// Update the styling for the navigator
 const item = {
-    py: '2px',
+    py: '6px',
     px: 3,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(255, 255, 255, 0.9)',
+    borderLeft: '3px solid transparent',
     '&:hover': {
-        color: "#4fc3f7"
+      color: "#fff",
+      backgroundColor: 'rgba(255, 255, 255, 0.08)',
+      borderLeft: '3px solid #4dabf5',
     },
     '&:focus': {
-        bgcolor: 'rgba(255, 255, 255, 0.08)',
+      bgcolor: 'rgba(255, 255, 255, 0.12)',
     },
-};
-
-const itemCategory = {
+  };
+  
+  const itemCategory = {
     boxShadow: '0 -1px 0 rgb(255,255,255,0.1) inset',
-    py: 1.5,
+    py: 2,
     px: 3,
-};
+  };
 
 export default function Navigator(props) {
     const { prop1, prop2, prop3, prop4, ...other } = { ...props };
@@ -41,26 +45,19 @@ export default function Navigator(props) {
 
         >
             <List disablePadding>
-                <ListItem sx={{ ...item, ...itemCategory, fontSize: 25, color: '#fff', mt: 1.5, pb: 3 }}>
-                    <Typography sx={{ fontSize: 31, mr: 2, ml: 0 }}>MadameX</Typography>
-
-
-                    <img
-                        src={logo}
-                        alt="logo"
-                        style={{
-                            width: "60px",
-
-                            // padding: "2px",
-                            // color: "#4fc3f7",
-                            // filter: "brightness(10)",
-                            // filter: "url(#blue-wash)",
-                            filter: "invert(1)"
-                        }}
-                        className="logo"
-                    />
-
-                </ListItem>
+            <ListItem sx={{ ...item, ...itemCategory, fontSize: 25, color: '#fff', mt: 1.5, pb: 3 }}>
+            <Typography sx={{ fontSize: 24, mr: 2, ml: 0, fontWeight: 600 }}>MadameX</Typography>
+            <img
+                src={logo}
+                alt="logo"
+                style={{
+                width: "50px",
+                filter: "brightness(1.2)",
+                animation: "pulse 2s infinite ease-in-out"
+                }}
+                className="logo"
+            />
+            </ListItem>
                 {/* <ListItem sx={{ ...item, ...itemCategory }}>
                     <ListItemIcon>
                         <CategoryIcon />

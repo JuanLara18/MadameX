@@ -1,68 +1,356 @@
+:root {
+  /* Main color palette */
+  --primary-color: #1976d2;
+  --primary-light: #4dabf5;
+  --primary-dark: #1565c0;
+  --secondary-color: #f50057;
+  --secondary-light: #ff5983;
+  --secondary-dark: #c51162;
+  
+  /* UI colors */
+  --background-color: #f5f7fa;
+  --paper-color: #ffffff;
+  --dark-bg: #152238;
+  --dark-paper: #1c3654;
+  
+  /* Text colors */
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --text-disabled: #9aa0a6;
+  --text-on-dark: #ffffff;
+  --text-on-dark-secondary: rgba(255, 255, 255, 0.7);
+  
+  /* Success/error states */
+  --success-color: #4caf50;
+  --error-color: #f44336;
+  --warning-color: #ff9800;
+  --info-color: #2196f3;
+  
+  /* Dimensions */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --spacing-unit: 8px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+  
+  /* Font settings */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'SF Mono', 'Courier New', Courier, monospace;
+  
+  /* Transitions */
+  --transition-fast: 0.2s;
+  --transition-normal: 0.3s;
+  --transition-slow: 0.5s;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  font-size: 16px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-family-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  line-height: 1.5;
+  height: 100%;
+  overflow-x: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+code, pre, .code-text {
+  font-family: var(--font-family-mono);
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: var(--border-radius-sm);
+  padding: 0.2em 0.4em;
 }
 
-/* .css-1gvcspu-MuiButtonBase-root-MuiAccordionSummary-root {
-
-  width: 250px !important;
-
-} */
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  margin-bottom: 10px;
+pre {
+  padding: var(--spacing-unit);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
-.center-hill {
-  margin-top: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  margin-bottom: 10px;
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
+a:hover {
+  color: var(--primary-light);
+  text-decoration: underline;
+}
+
+/* Logo animation */
 .logo {
-
-  animation-name: spin;
-  animation-duration: 30000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation: spin 30s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transform-origin: center center;
+  transform-box: fill-box;
 }
 
 @keyframes spin {
-
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(180deg);
+  }
   50% {
     transform: rotate(540deg);
-
   }
-
+  75% {
+    transform: rotate(720deg);
+  }
   100% {
-    transform: rotate(0deg);
-
+    transform: rotate(1080deg);
   }
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+}
+
+/* Better canvas styling */
 #canvas-container {
-  margin-top: 2%;
-  margin-left: 10%;
+  margin: 20px auto;
   width: 100%;
-  text-align: center;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 canvas {
-  width: 30%;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  margin: 16px;
+  background-color: var(--paper-color);
+  transition: all var(--transition-normal);
+}
+
+canvas:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.canvas {
+  width: 90%;
+  max-width: 700px;
+  margin: 20px auto;
+  display: block;
+}
+
+/* Better image handling */
+.center {
+  display: block;
+  margin: 24px auto;
+  width: 90%;
+  max-width: 700px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal);
+}
+
+.center:hover {
+  transform: scale(1.01);
+  box-shadow: var(--shadow-lg);
+}
+
+.center-hill {
+  margin: 16px auto;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Typography helpers */
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-secondary {
+  color: var(--secondary-color);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+.text-error {
+  color: var(--error-color);
+}
+
+.text-warning {
+  color: var(--warning-color);
+}
+
+.text-info {
+  color: var(--info-color);
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+.text-mono {
+  font-family: var(--font-family-mono);
+}
+
+/* Utility classes */
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-1 {
+  gap: calc(var(--spacing-unit) * 1);
+}
+
+.gap-2 {
+  gap: calc(var(--spacing-unit) * 2);
+}
+
+.p-1 {
+  padding: calc(var(--spacing-unit) * 1);
+}
+
+.p-2 {
+  padding: calc(var(--spacing-unit) * 2);
+}
+
+.p-3 {
+  padding: calc(var(--spacing-unit) * 3);
+}
+
+.m-1 {
+  margin: calc(var(--spacing-unit) * 1);
+}
+
+.m-2 {
+  margin: calc(var(--spacing-unit) * 2);
+}
+
+.m-3 {
+  margin: calc(var(--spacing-unit) * 3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .center, .canvas {
+    width: 95%;
+  }
+  
+  .hide-on-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 960px) {
+  html {
+    font-size: 15px;
+  }
+  
+  .center, .canvas {
+    width: 85%;
+  }
+}
+
+/* Dark mode support (if you want to add a toggle later) */
+@media (prefers-color-scheme: dark) {
+  /* These styles will only apply if the user has dark mode enabled 
+   * and your app supports it in the future
+   */
+  :root.dark-theme {
+    --background-color: #121212;
+    --paper-color: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Animation for result displays */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-container {
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Special scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }

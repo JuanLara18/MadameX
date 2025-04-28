@@ -1,51 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
-  <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <!-- <meta name="description" content="Web site created using create-react-app" /> -->
-  <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-  <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-  <!-- <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> -->
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <meta name="theme-color" content="#152238" />
+  <meta name="description" content="MadameX - Advanced cryptography toolkit for encryption, decryption, and analysis" />
+  
+  <!-- Favicon and app icons -->
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  
+  <!-- Modern Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Material Design Icons (optional but recommended) -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-  <link rel="icon" href="./logo.png">
-  <title>MadameX</title>
-
+  
+  <title>MadameX | Modern Cryptography Toolkit</title>
+  
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="MadameX Cryptography Toolkit" />
+  <meta property="og:description" content="Advanced encryption, decryption, and cryptanalysis platform for cryptography enthusiasts, educators, and security professionals." />
+  <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
+  <meta property="og:url" content="https://juanlara18.github.io/MadameX/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  
+  <!-- Preload critical assets for performance -->
+  <link rel="preload" href="%PUBLIC_URL%/logo.png" as="image" />
+  
+  <!-- Inline critical CSS for faster render -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+    }
+    #root {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #152238;
+      z-index: 9999;
+    }
+    .loading-logo {
+      width: 80px;
+      height: 80px;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+  </style>
 </head>
-
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  <div id="canvas-container">
-    <!-- <canvas id="myCanvas" width="700px" height="700px"></canvas> -->
-    <!-- <canvas id="myCanvas2" width="700px" height="700px"></canvas> -->
+  <noscript>You need to enable JavaScript to run this application.</noscript>
+  
+  <!-- Loading indicator -->
+  <div id="loading" class="loading-container">
+    <img src="%PUBLIC_URL%/logo.png" alt="Loading MadameX" class="loading-logo" />
   </div>
+  
+  <div id="root"></div>
+  
+  <!-- Canvas container for algorithm visualizations -->
+  <div id="canvas-container">
+    <!-- Canvas elements will be dynamically inserted here -->
+  </div>
+  
+  <!-- Remove loading screen once app is loaded -->
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const loadingElement = document.getElementById('loading');
+        if (loadingElement) {
+          loadingElement.style.opacity = '0';
+          loadingElement.style.transition = 'opacity 0.5s ease-out';
+          setTimeout(function() {
+            loadingElement.style.display = 'none';
+          }, 500);
+        }
+      }, 500);
+    });
+  </script>
 </body>
-
 </html>
